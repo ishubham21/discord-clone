@@ -1,3 +1,17 @@
 .sidebar{
-    
+    display: flex;
+    flex-direction: column;
+    flex: 25%;
+    height: 100vh;
+    background-color: #2f3135;;
+}
+
+.sidebar__top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #2f3135;
+    color: #fff;
+    border-bottom: 2px solid #26282c;
 }
