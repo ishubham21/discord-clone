@@ -1,8 +1,9 @@
 import style from './Sidebar.module.css'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AddIcon from '@mui/icons-material/AddIcon'
+import AddIcon from '@mui/icons-material/Add'
 
 const Sidebar = () => {
+
     return (<>
         <div className={style.sidebar}>
 
@@ -18,7 +19,7 @@ const Sidebar = () => {
                         <h4>Text Channels</h4>
                     </div>
                     
-                    <AddIcon onClick={handleAdd} className={style.sidebar__addChannel} />
+                    <AddIcon className={style.sidebar__addChannel} />
                 </div>
             </div>
 
