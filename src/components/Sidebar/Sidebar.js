@@ -4,6 +4,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add'
 import { InfoOutlined, SignalCellularAltOutlined } from '@mui/icons-material';
 import CallIcon from '@mui/icons-material/Call'
+import Avatar from '@mui/material/Avatar'
+import MicIcon from '@mui/icons-material/Mic';
+import SettingsIcon from '@mui/icons-material/Settings';
+import HeadsetIcon from '@mui/icons-material/Headset';
 
 const Sidebar = () => {
 
@@ -48,6 +52,26 @@ const Sidebar = () => {
                     <CallIcon sx={{
                         padding: '10px'
                     }} />
+                </div>
+            </div>
+
+            <div className={style.sidebar__profile}>
+                <Avatar />
+                <div className={style.sidebar__profileInfo}>
+                    <h3>Shubham Gautam</h3>
+                    <p>#thisIsMyID</p>
+                </div>
+
+                <div className={style.sidebar__profileIcons}>
+                    <MicIcon sx={{
+                        p: '10px'
+                    }}/>
+                    <HeadsetIcon sx={{
+                        p: '10px'
+                    }}/>
+                    <SettingsIcon sx={{
+                        p: '10px'
+                    }}/>
                 </div>
             </div>
         </div>

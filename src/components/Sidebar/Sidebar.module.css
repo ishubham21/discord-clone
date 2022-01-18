@@ -1,7 +1,7 @@
 .sidebar{
     display: flex;
     flex-direction: column;
-    flex: 25%;
+    flex: 0.25;
     height: 100vh;
     background-color: #2f3135;;
 }
@@ -42,7 +42,7 @@
     align-items: center;
 }
 
-.sidebar__voice{
+.sidebar__voice, .sidebar__profile{
     display: flex;
     justify-content: space-between;
     align-items: center; 
@@ -69,4 +69,11 @@
     font-size: smaller;
 }
 
+.sidebar__profileInfo{
+    flex:1;
+    padding: 10px;
+}
 
+.sidebar__profileInfo > h3{
+    color: #fff;
+}
