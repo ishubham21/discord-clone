@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import './App.css';
 import Chat from './components/Chat/Chat';
+import Login from './components/Login/Login';
 import Sidebar from './components/Sidebar/Sidebar';
 import { selectUser } from './features/userSlice'
 
@@ -17,7 +18,7 @@ function App() {
           <Sidebar />
           <Chat />
         </>) :
-        (<h2>You need to login</h2>)
+        (<Login />)
       }
     </div>
   );
