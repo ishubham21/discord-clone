@@ -7,7 +7,6 @@ const Login = () => {
     const signIn = () => {
         //do google login
         signInWithPopup(auth, provider)
-        .then(res => (console.log(res.user)))
         .catch(err => (alert('Error')))
     }
 

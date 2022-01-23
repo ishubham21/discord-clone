@@ -3,7 +3,6 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
 import { getFirestore } from "firebase/firestore"
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyDUVI3pIIaGH18eYQB-PombX_Lc1WLmwyk",
     authDomain: "discord-clone-ishubham-21.firebaseapp.com",
@@ -16,9 +15,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore()
-const auth = getAuth()
+const auth = getAuth(app)
 const provider = new GoogleAuthProvider()
 
 
-export { app, auth, provider, signInWithPopup }
+export { auth, provider, signInWithPopup }
 export default db

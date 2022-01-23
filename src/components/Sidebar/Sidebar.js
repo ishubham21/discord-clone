@@ -10,11 +10,11 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../features/userSlice';
+import { auth } from '../../firebase';
 
 const Sidebar = () => {
 
-    const user = useSelector(selectUser )
-    console.log(user)
+    const user = useSelector(selectUser)
 
     return (<>
         <div className={style.sidebar}>
@@ -61,7 +61,7 @@ const Sidebar = () => {
             </div>
 
             <div className={style.sidebar__profile}>
-                <Avatar src={user.photo}/>
+                <Avatar src={user.photo} onClick={() => { auth.signOut() }} />
                 <div className={style.sidebar__profileInfo}>
                     <h3>Shubham Gautam</h3>
                     <p>#thisIsMyID</p>
@@ -70,13 +70,13 @@ const Sidebar = () => {
                 <div className={style.sidebar__profileIcons}>
                     <MicIcon sx={{
                         p: '10px'
-                    }}/>
+                    }} />
                     <HeadsetIcon sx={{
                         p: '10px'
-                    }}/>
+                    }} />
                     <SettingsIcon sx={{
                         p: '10px'
-                    }}/>
+                    }} />
                 </div>
             </div>
         </div>

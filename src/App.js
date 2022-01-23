@@ -1,37 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import Chat from './components/Chat/Chat';
 import Login from './components/Login/Login';
 import Sidebar from './components/Sidebar/Sidebar';
 import { login, logout, selectUser } from './features/userSlice'
-import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './firebase';
 
 function App() {
 
   const dispatch = useDispatch()
   const user = useSelector(selectUser)  //user than controls navigation between the components
-  const [userFirebaseData, loading, error] = useAuthState(auth)
 
-  useEffect(() => {
-    if (error) {
-      console.log(error)
-    }
-    else {
-      if (!loading) {
+  const checkAuthState = useCallback(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
         dispatch(login({
-          uid: userFirebaseData.uid,
-          photo: userFirebaseData.photoURL,
-          email: userFirebaseData.email,
-          displayName: userFirebaseData.displayName
+          uid: authUser.uid,
+          photo: authUser.photoURL,
+          email: authUser.email,
+          displayName: authUser.displayName
         }))
       }
-      else{
+      else {
         dispatch(logout())
       }
-    }
-  }, [userFirebaseData, error, loading, dispatch])
+    })
+  }, [dispatch])
+
+  useEffect(() => {
+    checkAuthState()
+  }, [checkAuthState])
 
   return (
     <div className="app">
