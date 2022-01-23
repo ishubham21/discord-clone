@@ -12,6 +12,17 @@
     font-weight: 800;
 }
 
-.logo{
+.login > button:hover{
+    background-color: #000;
+    color: #738adb;
+}
 
+.login > div{
+    display: flex;
+    flex-direction: column;
+}
+
+.login > div > img{
+    object-fit: contain;
+    height: 150px;
 }

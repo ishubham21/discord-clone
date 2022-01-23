@@ -8,8 +8,13 @@ import Avatar from '@mui/material/Avatar'
 import MicIcon from '@mui/icons-material/Mic';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HeadsetIcon from '@mui/icons-material/Headset';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../features/userSlice';
 
 const Sidebar = () => {
+
+    const user = useSelector(selectUser )
+    console.log(user)
 
     return (<>
         <div className={style.sidebar}>
@@ -56,7 +61,7 @@ const Sidebar = () => {
             </div>
 
             <div className={style.sidebar__profile}>
-                <Avatar />
+                <Avatar src={user.photo}/>
                 <div className={style.sidebar__profileInfo}>
                     <h3>Shubham Gautam</h3>
                     <p>#thisIsMyID</p>

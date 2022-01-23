@@ -1,10 +1,14 @@
 import style from './Login.module.css'
-import { Button } from '@mui/material';
+import { auth, provider, signInWithPopup } from './../../firebase'
+import { Button } from '@mui/material'
 
 const Login = () => {
 
     const signIn = () => {
         //do google login
+        signInWithPopup(auth, provider)
+        .then(res => (console.log(res.user)))
+        .catch(err => (alert('Error')))
     }
 
     return (<>
