@@ -10,11 +10,48 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../features/userSlice';
-import { auth } from '../../firebase';
+import db, { auth } from '../../firebase';
+import { useEffect, useState } from 'react';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 
 const Sidebar = () => {
 
+    //pulling up the user-data from the user layer - redux
     const user = useSelector(selectUser)
+    const [channels, setChannels] = useState([])
+
+    useEffect(() => {
+
+        //using a async function inside useEffect 
+        //since useEffect doesn't allow async operations to be performed over the callback function
+        const fetchChannels = async () => {
+            
+            //snapshotting the data from channels collection
+            const querySnapshot = await getDocs(collection(db, 'channels')) //channels = [{id: xyz, data: {channelName: pqr}}] - data structure
+            
+            //updating the channel list to be displayed
+            querySnapshot.forEach(doc => {
+                setChannels(oldChannels => [...oldChannels, {
+                    id: doc.id,
+                    channelName: doc.data().channelName
+                }])
+            })
+        }
+
+        fetchChannels()
+    }, [])
+
+    const handleAddChannel = async () => {
+
+        //collecting the channelName from the user
+        const channelName = prompt("Enter a new channel name:")
+        if (channelName) {
+            //storing the channelName in the channels collection
+            await addDoc(collection(db, 'channels'), {
+                channelName: channelName
+            })
+        }
+    }
 
     return (<>
         <div className={style.sidebar}>
@@ -31,11 +68,11 @@ const Sidebar = () => {
                         <h4>Text Channels</h4>
                     </div>
 
-                    <AddIcon className={style.sidebar__addChannel} />
+                    <AddIcon onClick={handleAddChannel} className={style.sidebar__addChannel} />
                 </div>
 
                 <div className={style.sidebar__channelsList}>
-                    <SidebarChannel />
+                    {channels.map((channel) => (<SidebarChannel key={channel.id} id={channel.id} channelName={channel.channelName} />))}
                 </div>
             </div>
 
@@ -63,8 +100,8 @@ const Sidebar = () => {
             <div className={style.sidebar__profile}>
                 <Avatar src={user.photo} onClick={() => { auth.signOut() }} />
                 <div className={style.sidebar__profileInfo}>
-                    <h3>Shubham Gautam</h3>
-                    <p>#thisIsMyID</p>
+                    <h3>{user.displayName}</h3>
+                    <p>#{user.uid.substring(0, 6)}</p>
                 </div>
 
                 <div className={style.sidebar__profileIcons}>
