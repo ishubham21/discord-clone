@@ -19,9 +19,11 @@ const Sidebar = () => {
     //pulling up the user-data from the user layer - redux
     const user = useSelector(selectUser)
     const [channels, setChannels] = useState([])
+    const [channelRef, setChannelRef] = useState(null)
 
     useEffect(() => {
 
+        setChannels([])
         //using a async function inside useEffect 
         //since useEffect doesn't allow async operations to be performed over the callback function
         const fetchChannels = async () => {
@@ -39,7 +41,7 @@ const Sidebar = () => {
         }
 
         fetchChannels()
-    }, [])
+    }, [channelRef])
 
     const handleAddChannel = async () => {
 
@@ -47,9 +49,11 @@ const Sidebar = () => {
         const channelName = prompt("Enter a new channel name:")
         if (channelName) {
             //storing the channelName in the channels collection
-            await addDoc(collection(db, 'channels'), {
+            const addRef = await addDoc(collection(db, 'channels'), {
                 channelName: channelName
             })
+
+            setChannelRef(addRef)
         }
     }
 
