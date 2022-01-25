@@ -10,7 +10,9 @@ import { auth } from './firebase';
 function App() {
 
   const dispatch = useDispatch()
-  const user = useSelector(selectUser)  //user than controls navigation between the components
+
+  //useSelector hook is used to pull up information from the data layer - user layer in this case
+  const user = useSelector(selectUser)  //user that controls navigation between the components
 
   const checkAuthState = useCallback(() => {
     auth.onAuthStateChanged((authUser) => {

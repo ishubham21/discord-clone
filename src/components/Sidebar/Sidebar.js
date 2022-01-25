@@ -53,6 +53,7 @@ const Sidebar = () => {
                 channelName: channelName
             })
 
+            //using channelRef to make sure the <Sidebar /> rerenders and the lastest changes are pulled up
             setChannelRef(addRef)
         }
     }

@@ -6,15 +6,15 @@ import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAlt'
 import SendRoundedIcon from '@mui/icons-material/SendRounded'
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded'
 
-const ChatHeader = () => {
-    return ( <>
+const ChatHeader = ({ channelName }) => {
+    return (<>
         <div className={style.chatHeader}>
             <div className={style.chatHeader__left}>
                 <h3>
                     <span className={style.chatHeader__hash}>
                         #
                     </span>
-                    Test Channel Name
+                    {channelName}
                 </h3>
             </div>
             <div className={style.chatHeader__right}>
@@ -22,52 +22,52 @@ const ChatHeader = () => {
                     p: '10px',
                     cursor: 'pointer',
                     "&:hover": {
-                      color: '#fff'
+                        color: '#fff'
                     }
-                }}/>
+                }} />
                 <EditLocationRoundedIcon sx={{
                     p: '10px',
                     cursor: 'pointer',
                     "&:hover": {
-                      color: '#fff'
+                        color: '#fff'
                     }
-                }}/>
+                }} />
                 <PeopleAltRoundedIcon sx={{
                     p: '10px',
                     cursor: 'pointer',
                     "&:hover": {
-                      color: '#fff'
+                        color: '#fff'
                     }
-                }}/>
+                }} />
 
                 <div className={style.chatHeader__search}>
-                    <input type="text" placeholder='Search'/>
+                    <input type="text" placeholder='Search' />
                     <SearchRoundedIcon sx={{
-                    p: '10px',
-                    cursor: 'pointer',
-                    "&:hover": {
-                      color: '#fff'
-                    }
-                }}/>
+                        p: '10px',
+                        cursor: 'pointer',
+                        "&:hover": {
+                            color: '#fff'
+                        }
+                    }} />
                 </div>
 
                 <SendRoundedIcon sx={{
                     p: '10px',
                     cursor: 'pointer',
                     "&:hover": {
-                      color: '#fff'
+                        color: '#fff'
                     }
-                }}/>
+                }} />
                 <HelpRoundedIcon sx={{
                     p: '10px',
                     cursor: 'pointer',
                     "&:hover": {
-                      color: '#fff'
+                        color: '#fff'
                     }
-                }}/>
+                }} />
             </div>
         </div>
-    </> );
+    </>);
 }
- 
+
 export default ChatHeader;
