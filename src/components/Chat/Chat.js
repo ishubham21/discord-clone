@@ -14,10 +14,12 @@ import { doc, collection, getDocs, Timestamp, addDoc } from 'firebase/firestore'
 
 const Chat = () => {
 
+    //making use of useSelector hook to pull the details from the user and app data-layers respectively
     const user = useSelector(selectUser)
     const channelId = useSelector(selectChannelId)
     const channelName = useSelector(selectChannelName)
-    const [input, setInput] = useState('')
+
+    const [input, setInput] = useState('')  //this is causing optimization problems since it is causing the children components to be re-renderd each time it gets updates
     const [messages, setMessages] = useState([])
     const [messageRef, setMessageRef] = useState(null)
 
@@ -56,15 +58,18 @@ const Chat = () => {
     const sendMessage = async (e) => {
         e.preventDefault()
 
+        //creating a refernce of a doc with our channelID
         const channelRef = doc(db, 'channels', channelId)
+
+        //adding a new document each time a user hits enter
         const addRef = await addDoc(collection(channelRef, 'messages'), {
             message: input,
             user: user,
             timestamp: Timestamp.now().toMillis()
         })
 
+        //resetting the input field 
         setInput('')
-        console.log(addRef)
         setMessageRef(addRef)
     }
 

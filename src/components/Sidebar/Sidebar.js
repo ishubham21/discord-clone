@@ -43,6 +43,7 @@ const Sidebar = () => {
         fetchChannels()
     }, [channelRef])
 
+    //called once the user hits add channel button
     const handleAddChannel = async () => {
 
         //collecting the channelName from the user

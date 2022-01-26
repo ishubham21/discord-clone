@@ -5,7 +5,7 @@ import { Button } from '@mui/material'
 const Login = () => {
 
     const signIn = () => {
-        //do google login
+        //do google login - auth is exported from the firebase.js and provider is GoogleAuthProvider
         signInWithPopup(auth, provider)
         .catch(err => (alert('Error')))
     }

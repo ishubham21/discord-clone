@@ -15,6 +15,9 @@ function App() {
   const user = useSelector(selectUser)  //user that controls navigation between the components
 
   const checkAuthState = useCallback(() => {
+
+    //if the user logs in, a change in authState is detected
+    //we call the login action on user data layer, and pass the details of the user as payload
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         dispatch(login({
@@ -24,6 +27,8 @@ function App() {
           displayName: authUser.displayName
         }))
       }
+
+      //if the user logs out, we call the
       else {
         dispatch(logout())
       }
