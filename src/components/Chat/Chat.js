@@ -22,8 +22,9 @@ const Chat = () => {
     const [messageRef, setMessageRef] = useState(null)
 
     useEffect(() => {
+
         setMessages([])
-        
+
         const fetchMessages = async () => {
             if (channelId) {
                 try {
@@ -34,14 +35,15 @@ const Chat = () => {
 
                     //creating a collection of messages under the channels (collection) -> channelId (document) -> messages (collection)
                     const msgCollections = await getDocs(collection(channelRef, 'messages'))
-                    
+
                     //iterating over the message collections to get the data
                     msgCollections.forEach(doc => {
-                        tempMsg.push(doc.data())    
+                        tempMsg.push(doc.data())
                     })
 
+                    //sorting the array of msg in reverse chronological order
+                    tempMsg.sort((a, b) => (a.timestamp - b.timestamp))
                     setMessages(tempMsg)
-                    console.log(messages)
                 }
                 catch (error) {
                     console.log('An error occured')
@@ -58,10 +60,11 @@ const Chat = () => {
         const addRef = await addDoc(collection(channelRef, 'messages'), {
             message: input,
             user: user,
-            timestamp: Timestamp.now()
+            timestamp: Timestamp.now().toMillis()
         })
 
         setInput('')
+        console.log(addRef)
         setMessageRef(addRef)
     }
 
@@ -70,9 +73,15 @@ const Chat = () => {
             <ChatHeader channelName={channelName} />
 
             <div className={style.chat__messages}>
-                {messages.map(message => (
-                    <Message message={message}/>
-                ))}
+                {messages.map(message => {
+                    //creating a key by combining timestamp with the userID
+                    const key = `${message.timestamp}-${message.user.uid}`
+                    return (<Message 
+                        message={message.message} 
+                        timestamp={message.timestamp} 
+                        user={message.user} 
+                        key={key} />)
+                })}
             </div>
 
             <div className={style.chat__input}>

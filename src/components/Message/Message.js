@@ -1,17 +1,23 @@
 import { Avatar } from '@mui/material'
 import style from './Message.module.css'
 
-const Message = () => {
+const Message = ({ timestamp, user, message }) => {
+
+    //converting the epoch timestamp to regular date and time 
+    timestamp = new Date(timestamp).toString()
+
     return (<>
         <div className={style.message}>
-            <Avatar />
+            <Avatar src={user.photo} />
             <div className={style.message__info}>
                 <h4>
-                    Shubham
-                    <span className={style.message__timestamp}>timestamp here</span>
+                    {user.displayName}
+                    <span className={style.message__timestamp}>
+                        {timestamp}
+                    </span>
                 </h4>
 
-                <p>This is a message</p>
+                <p>{message}</p>
             </div>
         </div>
     </>)
